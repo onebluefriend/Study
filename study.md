@@ -88,7 +88,7 @@ git pull origin main
     ```
 
 - ```bash
-  git pull origin main
+  git pull origin master #注意最后这是本地分支的名字
   ```
 
 
@@ -163,12 +163,12 @@ git pull origin main
 - 提交远程仓库
 
   ```bash
-  git pull <远程仓库名> <远程分支名>:<本地分支名>
-  #如果省略 :<本地分支名> 这部分，Git 会默认将远程分支的内容合并到当前所在的本地分支。
+  git push <远程仓库名> <本地分支名>:<远程分支名>
+  #如果本地分支和远程分支名称相同，可简写为 git push <远程仓库名> <本地分支名>
   git pull origin master
   
-  #把远程 origin 仓库的 dev 分支内容拉取下来并合并到本地的 feature 分支
-  git pull origin dev:feature
+  #假设你在本地有一个名为 feature-new 的分支，想要将其推送到远程仓库的 dev 分支，可使用如下命令：
+  git push origin feature-new:dev
   ```
 
   
