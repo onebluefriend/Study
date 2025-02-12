@@ -24,7 +24,7 @@
 
 ---
 
-# 在Windows上面使用Linux的命令--使用git20250212
+# 在Windows上面使用Linux的命令--使用git
 
 ```bash
 #切换分支	switch 是 Git 2.23 版本引入的专门用于切换分支的命令，语法更加简洁明了
