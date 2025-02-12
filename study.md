@@ -26,6 +26,73 @@
 
 # 在Windows上面使用Linux的命令--使用git
 
+```bash
+#切换分支	switch 是 Git 2.23 版本引入的专门用于切换分支的命令，语法更加简洁明了
+git checkout <目标分支名>
+git switch <目标分支名>
+#新建并切换到新分支
+git checkout -b <新分支名>
+git switch -c <新分支名>
+
+#将新分支推送到远程仓库
+git push -u <远程仓库别名> <新分支名>
+#-u 选项（--set-upstream 的简写）：用于建立本地分支和远程分支的关联，之后再进行推送时，就可以直接使用 git push 而无需再指定远程仓库和分支名。
+#<远程仓库别名>：通常默认是 origin，它是克隆远程仓库时 Git 自动为远程仓库设置的别名。
+#<新分支名>：你在本地创建的新分支的名称。
+
+
+#当你想切换到远程分支对应的本地跟踪分支时，需要指定完整的远程分支名，一般格式为 origin/<远程分支名>。例如，切换到远程 origin 仓库的 develop 分支对应的本地跟踪分支：
+git checkout origin/develop
+git switch origin/develop
+
+#在本地查看远程分支列表
+git branch -r
+#删除本地分支
+git branch -d <分支名>
+git branch -D <分支名>	#强制删除
+
+#使用 git push 命令删除远程分支
+git push <远程仓库别名> --delete <远程分支名>
+	<远程仓库别名>：通常默认是 origin，它是克隆远程仓库时 Git 自动为远程仓库设置的别名。
+	<远程分支名>：要删除的远程仓库分支的
+	#例如:下面两者等价
+	git push origin --delete old-feature名称。
+	git push origin :old-feature	#这里冒号前面为空，表示将一个空分支推送到 old-feature 分支，从而达到删除该远程分支的目的。
+#删除远程分支后，本地仓库可能仍然保留着对该远程分支的跟踪信息。你可以使用以下命令清理本地的远程分支引用：
+git remote prune origin
+#删除远程分支后，你可以使用 git branch -r 命令查看远程分支列表，确认指定的分支是否已被成功删除：
+git branch -r
+
+
+拉取远程仓库main分支
+git pull origin main
+将本地仓库推送到远程仓库main分支
+
+```
+
+- 将本地仓库推送到远程仓库的 `main` 分支:
+
+  - 查看当前本地仓库关联的远程仓库信息:
+
+    ```bash
+    git remote -v
+    ```
+
+  - 如果输出结果中没有显示远程仓库的地址，或者地址不是你想要关联的远程仓库地址，你可以使用以下命令来添加或修改关联：
+
+    ```bash
+    # 添加远程仓库关联
+    git remote add origin <远程仓库地址>
+    # 修改已有的远程仓库关联地址
+    git remote set-url origin <远程仓库地址>
+    ```
+
+- ```bash
+  git pull origin main
+  ```
+
+
+
 注意,在Linux中是区分大小写命令的,而git不区分.
 
 - 命令后面加上`--help`可查看该命令的帮助信息, 如果是在命令前面加上`man`,该命令则比前者提供更加详细的信息(git中不能使用).
@@ -62,8 +129,18 @@
 
   ```bash
   git clone <远程仓库地址> [本地目录名]
-  git clone https://github.com/user/repo.git
+  git clone https://github.com/onebluefriend/first1.git
+  
+  #克隆远程仓库main分支里的东西到本地电脑:加上 "-b 分支名"
+  git clone -b main https://github.com/onebluefriend/first1.git
   ```
+
+- 关联远程仓库，需要使用 `git remote add` 命令将本地仓库与远程仓库关联起来
+
+  ```bash 
+  git remote add origin https://github.com/onebluefriend/first1.git
+  ```
+
 
 - 拉取远程仓库
 
@@ -191,6 +268,39 @@
   ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCuh+UMT3QX0qQUIlyEm7O9mQPsY436NDJRVW3hGbkv2Y+8pjtbhnsbSgWxQ3yiuHgaTh6EdpZpmCQPfuhG7NDPVGMBp5dbvi4HNf+gTAIBUE7HH5fqnwdfgMOYXWGrl/nuEMenUioMHItEsfr4UhiSvXAM41y+7nm8rCQ5cIbwJwfCPv37L5vs7HGeiTCADURbAbVvq44aZ4ljaMam3vQMr0IncMnjz06sR5WbHdmkAuC2D6NG5g1m+TM7H02WfDqKKX2ytgNe5qMYreDpb32miIPw58U3jSdd5w77+k8g3vRPxO1w3OC1Miwr55KPscpV6NXm2JlyTlCUCRyQHPVx7tctgRVs/93Q/LF6gK8FKVL8KDl7Wt5/nEgIEiv2+9bgL8/bQjOLOfWAHdAlxlR8ElCRfocXVT2yZJguz+dAaDpS0DZ8mc/WoCEOhzrjjN2UyP3cndBET4aBsFZf9nBCaN/a7XqxWny9+NsZCbfblApuqboFSINzlO1zQL+o8i0= 18220@ARong
   
   ```
+
+- 错误
+
+  ```bash
+  本地仓库可能没有及时获取到远程仓库最新的分支信息，你可以使用 git fetch 命令来更新。
+  
+  #切换分支
+  git checkout <目标分支名>
+  #在本地仓库中，使用 git checkout -b 命令创建一个新分支并同时切换到该分支。
+  git checkout -b new-feature
+  #使用 git pull 命令从远程仓库拉取 main 分支的内容并合并到当前的 new-feature 分支。
+  git pull origin main
+  #当你在执行 git pull 或者 git merge 操作时遇到 fatal: refusing to merge unrelated histories 错误，这是因为 Git 默认情况下不允许合并两个没有共同历史的分支或仓库。
+  #假设你要将远程仓库的 main 分支内容拉取到本地新分支并合并，可执行以下命令：
+  git pull --allow-unrelated-histories origin main
+  
+  #查看本地仓库中存在哪些分支，可使用 git branch 命令
+  git branch
+  
+  #想查看远程仓库中的分支情况，可以使用 git branch -r 命令，其中 -r 是 --remotes 的简写。
+  git branch -r
+  
+  #使用 git branch -a 命令可以同时查看本地和远程仓库的分支信息，-a 是 --all 的简写。
+  
+  #查看已合并到当前分支的分支
+  git branch --merged
+  
+  #当你执行 git pull origin main 出现 fatal: refusing to merge unrelated histories 错误提示时，这是因为 Git 默认情况下不允许合并两个没有共同历史的分支或仓库
+  git pull --allow-unrelated-histories origin main
+  #执行该命令后，Git 会尝试合并远程 main 分支和本地当前分支的内容。不过，由于两者历史无关联，可能会产生大量的合并冲突。
+  ```
+
+  
 
 # vim
 
