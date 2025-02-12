@@ -1,7 +1,5 @@
 # CDSN 
-1122333
 [Git基本使用（很详细）-CSDN博客](https://blog.csdn.net/qq_45796592/article/details/128953729?ops_request_misc=%7B%22request%5Fid%22%3A%2260c942b2cdca6ac00897d863c19769ca%22%2C%22scm%22%3A%2220140713.130102334.pc%5Fall.%22%7D&request_id=60c942b2cdca6ac00897d863c19769ca&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~hot_rank-1-128953729-null-null.142^v101^pc_search_result_base2&utm_term=git&spm=1018.2226.3001.4187)
-
 ---
 
 [Typora基础设置、MarkDown语法_markdown异或符号-CSDN博客](https://blog.csdn.net/zzh45828/article/details/105883083)
@@ -25,6 +23,42 @@
 ---
 
 # 在Windows上面使用Linux的命令--使用git
+
+## **本电脑常用命令**
+
+```bash
+#从远程仓库拉取到本地
+git pull origin main
+
+#本地提交到远程仓库步骤
+git add .
+git commit -m "备注"
+git push origin master:main
+```
+
+## 从远程仓库拉取到本地
+
+```bash
+git pull <远程仓库名> <远程分支名>:<本地分支名>
+#如果省略 :<本地分支名>，则默认合并到当前所在的本地分支	
+git pull origin master
+
+#拉取 origin 远程仓库的 dev 分支并合并到本地的 feature 分支：
+git pull origin dev:feature
+```
+
+## 本地上传到远程仓库
+
+```bash
+git push <远程仓库名> <本地分支名>:<远程分支名>
+#如果本地分支和远程分支名称相同，可简写为 git push <远程仓库名> <本地分支名>
+git pull origin master
+
+#假设你在本地有一个名为 feature-new 的分支，想要将其推送到远程仓库的 dev 分支，可使用如下命令：
+git push origin feature-new:dev
+```
+
+---
 
 ```bash
 #切换分支	switch 是 Git 2.23 版本引入的专门用于切换分支的命令，语法更加简洁明了
