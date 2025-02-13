@@ -30,7 +30,7 @@
 #从远程仓库拉取到本地
 git pull origin main
 
-#本地提交到远程仓库步骤
+#本地提交到github远程仓库步骤
 git add .
 git commit -m "备注"
 git push origin master:main
