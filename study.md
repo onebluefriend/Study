@@ -34,7 +34,7 @@
 git pull origin main
 
 #从gitee远程仓库拉取到本地
-git pull gitee master
+git pull origin master
 
 #本地提交到github远程仓库步骤
 git add .
@@ -44,8 +44,32 @@ git push origin master:main
 #本地提交到gitee远程仓库步骤
 git add .
 git commit -m "备注"
-git push gitee master
+git push origin master
 ```
+
+# 本地仓库与远程仓库建立连接
+
+- 初始化本地仓库
+
+```bash
+git init
+```
+
+- 与远程仓库建立连接
+
+```bash
+#git remote add <远程仓库别名> <远程仓库地址>
+git remote add origin https://github.com/onebluefriend/Study.git
+git remote add origin https://gitee.com/AZERONG/Study.git
+```
+
+- 查看连接
+
+```bash
+git remote -v
+```
+
+
 
 ## 从远程仓库拉取到本地
 
