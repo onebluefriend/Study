@@ -34,6 +34,20 @@ git pull origin main
 git add .
 git commit -m "备注"
 git push origin master:main
+
+#查看本地关联的远程仓库
+git remote -v
+#关联了远程仓库名为origin(这是电脑为我们自动取的别名,一个电脑只能有一个),地址是后面那个
+origin  https://github.com/onebluefriend/first1.git (fetch)
+origin  https://github.com/onebluefriend/first1.git (push)
+#关联了远程仓库名为gitee,地址是后面那个
+gitee   https://gitee.com/AZERONG/Study.git (fetch)	
+gitee   https://gitee.com/AZERONG/Study.git (push)
+#关联多个仓库是,需要我们自己取别名
+git remote add gitee https://gitee.com/AZERONG/Study.git
+git remote add：这是一个 Git 命令，用于添加一个新的远程仓库关联到本地仓库。
+#gitee：这是你为新添加的远程仓库指定的别名。之后在执行 git pull、git push 等操作时，就可以使用这个别名来代表这个远程仓库，而不用每次都输入完整的仓库地址。
+#https://gitee.com/AZERONG/Study.git：这是新远程仓库的 HTTPS 地址，也就是你要关联的 Gitee 仓库的具体地址。
 ```
 
 ## 从远程仓库拉取到本地
@@ -334,6 +348,17 @@ git pull origin main
   #执行该命令后，Git 会尝试合并远程 main 分支和本地当前分支的内容。不过，由于两者历史无关联，可能会产生大量的合并冲突。
   ```
 
+  # 查看
+  
+  ### 判断当前上传仓库
+  
+  - **查看远程仓库配置**：使用`git remote -v`命令，会列出所有远程仓库的名称和对应的 URL，能看到每个远程仓库的 fetch 和 push 地址，可确定当前默认的推送仓库。
+  - **查看分支关联信息**：执行`git branch -vv`命令，能看到本地分支与远程分支的关联情况，明确当前分支所跟踪的远程分支属于哪个远程仓库。
+  
+  ```bash
+  https://gitee.com/AZERONG/Study.git
+  ```
+  
   
 
 # vim
@@ -357,4 +382,42 @@ git pull origin main
   - `:n` 跳到第n行
 - 在vim编辑器中临时设置行号 `set nu`,  关闭行号`set nonu`.
   - 永久显示行号,修改vim配置文件vimrc，如果没有此文件可以创建一个``vim ~/.vimrc`
+
+```bash
+我现在使用 git remote -v命令,显示下面
+origin  https://github.com/onebluefriend/first1.git (fetch)
+origin  https://github.com/onebluefriend/first1.git (push)
+这代表我与上面的地址进行绑定了,我push和pull都是上面的地址,现在我想增加一个gitee的远程仓库,我的gitee的HPPTH地址是https://gitee.com/AZERONG/Study.git,我该怎么增加?
+我使用git remote add origin https://gitee.com/AZERONG/Study.git命令,系统提示下面的信息
+error: remote origin already exists.这是什么原因,该怎么解决?
+
+当你执行 git remote add origin https://gitee.com/AZERONG/Study.git 命令时，出现 error: remote origin already exists. 错误提示，这是因为在 Git 里，origin 是克隆远程仓库时 Git 自动为远程仓库设置的默认别名，而你当前的本地仓库已经存在一个名为 origin 的远程仓库关联（通过 git remote -v 可以看到，当前 origin 关联的是 GitHub 仓库 https://github.com/onebluefriend/first1.git）。Git 不允许为不同的远程仓库使用相同的别名，所以当你再次尝试使用 origin 作为新的远程仓库别名时，就会报错。
+解决办法
+为了将 Gitee 仓库添加为新的远程仓库，你需要为其指定一个不同的别名，而不是使用已经存在的 origin。以下是具体步骤：
+1. 为 Gitee 仓库指定一个新的别名并添加远程仓库
+可以使用 git remote add 命令添加新的远程仓库，同时为其指定一个新的别名，比如 gitee。执行以下命令：
+bash
+git remote add gitee https://gitee.com/AZERONG/Study.git
+这里的 gitee 就是新的远程仓库别名，你可以根据自己的喜好自定义。执行该命令后，本地仓库就会建立与 Gitee 仓库的关联。
+2. 验证新的远程仓库是否添加成功
+使用 git remote -v 命令查看当前本地仓库关联的所有远程仓库信息。
+bash
+git remote -v
+执行该命令后，输出应该类似如下内容：
+plaintext
+origin  https://github.com/onebluefriend/first1.git (fetch)
+origin  https://github.com/onebluefriend/first1.git (push)
+gitee   https://gitee.com/AZERONG/Study.git (fetch)
+gitee   https://gitee.com/AZERONG/Study.git (push)
+这表明你已经成功将 Gitee 仓库添加为新的远程仓库，并且使用 gitee 作为其别名。
+3. 向新添加的远程仓库推送和拉取代码
+添加成功后，你就可以使用新的别名进行代码的推送和拉取操作了。
+推送代码到 Gitee 仓库：假设你要将本地的 main 分支推送到 Gitee 仓库的 main 分支，可以执行以下命令：
+bash
+git push -u gitee main
+从 Gitee 仓库拉取代码：如果你想从 Gitee 仓库的 main 分支拉取更新到本地的 main 分支，可以使用以下命令：
+bash
+git pull gitee main
+通过以上步骤，你就可以成功添加一个新的远程仓库，并对其进行代码的推送和拉取操作。
+```
 
