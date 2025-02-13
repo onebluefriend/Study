@@ -35,7 +35,10 @@ git add .
 git commit -m "备注"
 git push origin master:main
 
-
+#本地提交到gitee远程仓库步骤
+git add .
+git commit -m "备注"
+git push gitee master
 ```
 
 ## 从远程仓库拉取到本地
