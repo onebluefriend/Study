@@ -35,19 +35,7 @@ git add .
 git commit -m "备注"
 git push origin master:main
 
-#查看本地关联的远程仓库
-git remote -v
-#关联了远程仓库名为origin(这是电脑为我们自动取的别名,一个电脑只能有一个),地址是后面那个
-origin  https://github.com/onebluefriend/first1.git (fetch)
-origin  https://github.com/onebluefriend/first1.git (push)
-#关联了远程仓库名为gitee,地址是后面那个
-gitee   https://gitee.com/AZERONG/Study.git (fetch)	
-gitee   https://gitee.com/AZERONG/Study.git (push)
-#关联多个仓库是,需要我们自己取别名
-git remote add gitee https://gitee.com/AZERONG/Study.git
-git remote add：这是一个 Git 命令，用于添加一个新的远程仓库关联到本地仓库。
-#gitee：这是你为新添加的远程仓库指定的别名。之后在执行 git pull、git push 等操作时，就可以使用这个别名来代表这个远程仓库，而不用每次都输入完整的仓库地址。
-#https://gitee.com/AZERONG/Study.git：这是新远程仓库的 HTTPS 地址，也就是你要关联的 Gitee 仓库的具体地址。
+
 ```
 
 ## 从远程仓库拉取到本地
@@ -66,13 +54,33 @@ git pull origin dev:feature
 ```bash
 git push <远程仓库名> <本地分支名>:<远程分支名>
 #如果本地分支和远程分支名称相同，可简写为 git push <远程仓库名> <本地分支名>
-git pull origin master
+git push origin master
 
 #假设你在本地有一个名为 feature-new 的分支，想要将其推送到远程仓库的 dev 分支，可使用如下命令：
 git push origin feature-new:dev
 ```
 
 ---
+
+- 新增远程仓库
+
+  ```bash
+  #查看本地关联的远程仓库
+  git remote -v
+  #关联了远程仓库名为origin(这是电脑为我们自动取的别名,一个电脑只能有一个),地址是后面那个
+  origin  https://github.com/onebluefriend/first1.git (fetch)
+  origin  https://github.com/onebluefriend/first1.git (push)
+  #关联了远程仓库名为gitee,地址是后面那个
+  gitee   https://gitee.com/AZERONG/Study.git (fetch)	
+  gitee   https://gitee.com/AZERONG/Study.git (push)
+  #关联多个仓库是,需要我们自己取别名
+  git remote add gitee https://gitee.com/AZERONG/Study.git
+  git remote add：这是一个 Git 命令，用于添加一个新的远程仓库关联到本地仓库。
+  #gitee：这是你为新添加的远程仓库指定的别名。之后在执行 git pull、git push 等操作时，就可以使用这个别名来代表这个远程仓库，而不用每次都输入完整的仓库地址。
+  #https://gitee.com/AZERONG/Study.git：这是新远程仓库的 HTTPS 地址，也就是你要关联的 Gitee 仓库的具体地址。
+  ```
+
+----
 
 ```bash
 #切换分支	switch 是 Git 2.23 版本引入的专门用于切换分支的命令，语法更加简洁明了
